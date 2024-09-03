@@ -16,11 +16,25 @@
 
   <br>
   <h2>Upload a CSV File</h2>
-  <input type="file" id="csvFileInput" accept=".csv"><br>
+  <input type="file" id="csvFileInput" accept=".csv">
+  <br>
 
   <script>
+    const idColumnName = 'ID'
+    const fullNameColumnName = 'Full Name'
+    const positionColumnName = 'Position'
+    const phoneColumnName = 'Phone Number'
+    const profileImgColumnName = 'Profile Image Link'
+
+    const baseIconUrl = './srcImg/'
+    const phoneIconUrl = `${baseIconUrl}phone-blue-20px.png`
+    const pinIconUrl = `${baseIconUrl}pin-blue-20px.png`
+    const shareIconUrl = `${baseIconUrl}share-blue-20px.png`
+    const companyIconUrlTop = `${baseIconUrl}companyTop.png`
+    const companyIconUrlBottom = `${baseIconUrl}companyBottom.png`
+
     function transformUrl(originalUrl) {
-      urlArr = originalUrl.split("/");
+      const urlArr = originalUrl.split("/");
       return `https://drive.google.com/thumbnail?id=${urlArr[5]}`;
     }
     
@@ -46,7 +60,7 @@
     function generate(csvArray) {
       csvArray.forEach(user => {
         document.body.innerHTML = document.body.innerHTML + `
-          <br>${user['ID']}.
+          <br>${user[idColumnName]}.
           <table cellpadding="0" cellspacing="0" border="0" class="sh-src" style="margin: 0px; border-collapse: collapse">
             <tbody><tr>
               <td style="padding: 0px 1px 0px 0px">
@@ -57,7 +71,7 @@
                         <tbody><tr>
                           <td style="padding: 0px 1px 0px 0px">
                             <p style="margin: 1px">
-                              <img id="imgProfile" src="${transformUrl(user['Profile Image Link'])}" alt="" title="Profile Picture" width="58" height="58" style="
+                              <img id="imgProfile" src="${transformUrl(user[profileImgColumnName])}" alt="" title="Profile Picture" width="58" height="58" style="
                                   display: block;
                                   border: 0px;
                                   width: 58px;
@@ -92,7 +106,7 @@
                                 color: rgb(0, 0, 0);
                                 white-space: nowrap;
                                 margin: 1px;
-                              ">${user['Full Name']}</p>
+                              ">${user[fullNameColumnName]}</p>
                             <p id="position" style="
                                 font-family: &#39;Times New Roman&#39;, Times, serif;
                                 font-size: 14px;
@@ -100,7 +114,7 @@
                                 white-space: nowrap;
                                 color: #0077b6;
                                 margin: 1px;
-                              ">${user['Position']}</p>
+                              ">${user[positionColumnName]}</p>
                             <p style="
                                 font-family: &#39;Times New Roman&#39;, Times, serif;
                                 font-size: 14px;
@@ -127,7 +141,7 @@
                                   ">
                                   <p style="margin: 1px">
                                     <!-- ImgPhone -->
-                                    <img src="https://athipannawatmarketingguru.github.io/signature/srcImg/phone-blue-20px.png" alt="" width="18" height="18" style="
+                                    <img src="${phoneIconUrl}" alt="" width="18" height="18" style="
                                         display: block;
                                         border: 0px;
                                         max-width: 18px;
@@ -158,7 +172,8 @@
                                           white-space: nowrap;
                                           color: #0077b6;
                                           text-decoration: none !important;
-                                        ">${user['Phone Number']}</span><!-- Tel --></span>
+                                        ">${user[phoneColumnName]}</span>
+                                    </span>
                                   </p>
                                 </td>
                               </tr>
@@ -169,7 +184,7 @@
                                   ">
                                   <p style="margin: 1px">
                                     <!-- ImgPin -->
-                                    <img src="https://athipannawatmarketingguru.github.io/signature/srcImg/pin-blue-20px.png" alt="" width="18" height="18" style="
+                                    <img src="${pinIconUrl}" alt="" width="18" height="18" style="
                                         display: block;
                                         border: 0px;
                                         max-width: 18px;
@@ -205,7 +220,7 @@
                                   ">
                                   <p style="margin: 1px">
                                     <!-- ImgShare -->
-                                    <img src="https://athipannawatmarketingguru.github.io/signature/srcImg/share-blue-20px.png" alt="" width="18" height="18" style="
+                                    <img src="${shareIconUrl}" alt="" width="18" height="18" style="
                                         display: block;
                                         border: 0px;
                                         max-width: 18px;
@@ -267,7 +282,7 @@
                         line-height: 14px;
                         color: rgb(136, 136, 136);
                       ">
-                      <img src="https://athipannawatmarketingguru.github.io/signature/srcImg/companyTop.png" alt="" width="500" height="40" style="
+                      <img src="${companyIconUrlTop}" alt="" width="500" height="40" style="
                           display: block;
                           border: 0px;
                           width: 500px;
@@ -291,7 +306,7 @@
                         line-height: 14px;
                         color: rgb(136, 136, 136);
                       ">
-                      <img src="https://athipannawatmarketingguru.github.io/signature/srcImg/companyBottom.png" alt="" width="500" height="40" style="
+                      <img src="${companyIconUrlBottom}" alt="" width="500" height="40" style="
                           display: block;
                           border: 0px;
                           width: 500px;
@@ -340,6 +355,7 @@
           <hr>
         `;
       })
+      document.body.innerHTML = document.body.innerHTML + '<br>'
     }
 
     const fileInput = document.getElementById('csvFileInput');
@@ -365,8 +381,6 @@
       }
     });
   </script>
-
-  <br>
 </body>
 
 </html>
